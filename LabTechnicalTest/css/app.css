@@ -1,0 +1,15 @@
+﻿body {
+}
+
+div.mainarea
+{
+    width:100%;
+    margin-left:10px;
+    margin-right:10px;
+    text-align:center;
+}
+
+input.fileinput
+{
+    display:inline-block;
+}
