@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabTechnicalTest", "LabTechnicalTest\LabTechnicalTest.csproj", "{76684663-1F75-4C08-803B-9D4ACBCCC577}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabTechnicalTest.API", "LabTechnicalTest.API\LabTechnicalTest.API.csproj", "{71F409CB-7EE5-4D07-8D2F-38B17A1DB737}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{76684663-1F75-4C08-803B-9D4ACBCCC577}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76684663-1F75-4C08-803B-9D4ACBCCC577}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76684663-1F75-4C08-803B-9D4ACBCCC577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71F409CB-7EE5-4D07-8D2F-38B17A1DB737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71F409CB-7EE5-4D07-8D2F-38B17A1DB737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71F409CB-7EE5-4D07-8D2F-38B17A1DB737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71F409CB-7EE5-4D07-8D2F-38B17A1DB737}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

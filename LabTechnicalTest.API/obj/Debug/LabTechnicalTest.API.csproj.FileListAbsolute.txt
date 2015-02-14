@@ -1,0 +1,5 @@
+C:\Dev\Personal\Lab-Techical-Test\LabTechnicalTest.API\bin\Debug\LabTechnicalTest.API.dll
+C:\Dev\Personal\Lab-Techical-Test\LabTechnicalTest.API\bin\Debug\LabTechnicalTest.API.pdb
+C:\Dev\Personal\Lab-Techical-Test\LabTechnicalTest.API\obj\Debug\LabTechnicalTest.API.csprojResolveAssemblyReference.cache
+C:\Dev\Personal\Lab-Techical-Test\LabTechnicalTest.API\obj\Debug\LabTechnicalTest.API.dll
+C:\Dev\Personal\Lab-Techical-Test\LabTechnicalTest.API\obj\Debug\LabTechnicalTest.API.pdb

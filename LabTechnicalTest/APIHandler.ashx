@@ -1,0 +1,1 @@
+﻿<%@ WebHandler Language="C#" CodeBehind="APIHandler.ashx.cs" Class="LabTechnicalTest.API.APIHandler" %>
