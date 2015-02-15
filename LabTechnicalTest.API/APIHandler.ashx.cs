@@ -52,7 +52,6 @@ namespace LabTechnicalTest.API
             StringBuilder sb = new StringBuilder();
 
             sb.Append("Call any method without any parameters to get help text, if relevant.<br /><br />");
-
             sb.Append("<a href=\"/api/postfile\">/api/postfile</a> : Post a CSV file.<br />");
             context.Response.Write(sb.ToString());
             return;

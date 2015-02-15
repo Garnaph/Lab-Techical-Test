@@ -112,6 +112,5 @@ namespace LabTechnicalTest.API.Test
             var output = PostFile.ProcessInput(inputData);
             Assert.IsTrue(output.Result.Equals(-1));
         }
-
     }
 }

@@ -109,6 +109,7 @@ namespace LabTechnicalTest.API.Logic
                 }
             }
 
+            //This code should never run, as we will always stop halfway through, but there are edge cases, such as when the length is 1, in which this will certainly run.
             output.Message = "No clear winner";
             return output;
         }

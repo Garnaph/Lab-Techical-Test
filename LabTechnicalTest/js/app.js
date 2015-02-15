@@ -11,7 +11,8 @@ function test() {
     
     if (files.length == 0)
     {
-        $('#output').text("No file selected");
+        $('#output').text('Result : -1');
+        $('#message').text("Debug Message : No file selected");
         return;
     }
 
@@ -30,7 +31,6 @@ function test() {
         processData: false,
         success: function(returnData)
         {
-            console.log(returnData);
             $('#output').text('Result : ' + returnData.Result);
             $('#message').text('Debug Message : ' + returnData.Message);
         }
