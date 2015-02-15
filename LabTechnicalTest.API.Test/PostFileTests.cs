@@ -103,7 +103,7 @@ namespace LabTechnicalTest.API.Test
         {
             //100,001
             List<string> temp = new List<string>();
-            for(int i=0 ; i<100002 ; i++)
+            for(int i=1 ; i<100002 ; i++)
             {
                 temp.Add(i.ToString());
             }
