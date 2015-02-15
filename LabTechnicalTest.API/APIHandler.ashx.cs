@@ -9,9 +9,9 @@ namespace LabTechnicalTest.API
 {
     public class APIHandler : IHttpHandler
     {
-
         public void ProcessRequest(HttpContext context)
         {
+            //This is included for public APIs - it's removed if we specifically want to disallow cross-domain requests for any reason
             context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
 
             // /api/methodpath?parameter1=value
@@ -20,9 +20,11 @@ namespace LabTechnicalTest.API
             string absPath = context.Request.Url.AbsolutePath;
 
             #region Help
-            if ((absPath.Equals("/api", StringComparison.OrdinalIgnoreCase))
-               || (absPath.Equals("/api/", StringComparison.OrdinalIgnoreCase)))
+            if (absPath.Equals("/api/", StringComparison.OrdinalIgnoreCase))
             {
+                //The purpose of this is to document the functionality of the API.
+                //Anyone who needs to use the API can be pointed at the /api/ endpoint (which can have aliases for /api/help, for example)
+                //This output can then detail all methods available, in an HTML format, that can be explored in a web browser mm 
                 HelpText(context);
                 return;
             }

@@ -8,7 +8,7 @@ using System.Web;
 
 namespace LabTechnicalTest.API.Logic
 {
-    class PostFile
+    public class PostFile
     {
         public static void Run(HttpContext context)
         {
@@ -38,7 +38,7 @@ namespace LabTechnicalTest.API.Logic
             }
         }
 
-        private static OutputFormat ProcessInput(string inputData)
+        public static OutputFormat ProcessInput(string inputData)
         {
             string message = "";
 
