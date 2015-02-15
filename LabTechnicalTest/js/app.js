@@ -20,12 +20,8 @@ function test() {
     var form = new FormData();
     form.append("file", filelink);
 
-    //var myData = $(form).serialize();
-    //var formData = new FormData($('form')[0]);
-
     $.ajax({
         type: "POST",
-        //contentType: attr("enctype", "multipart/form-data"),
         enctype: 'multipart/form-data',
         url: "/api/postfile",
         data: form,
@@ -35,18 +31,8 @@ function test() {
         success: function(returnData)
         {
             console.log(returnData);
+            $('#output').text('Result : ' + returnData.Result);
+            $('#message').text('Debug Message : ' + returnData.Message);
         }
     });
-
-    //var form = new FormData();
-    //form.append("file", filelink);
-
-    //var xhr = new XMLHttpRequest();
-    //xhr.onload = function () {
-    //    console.log("Upload complete " + filelink.name);
-    //    console.log()
-    //    //TODO do something with output of API call
-    //};
-    //xhr.open("post", "/api/postfile", true);
-    //xhr.send(form);
 }

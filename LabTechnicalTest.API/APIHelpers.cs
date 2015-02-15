@@ -26,17 +26,14 @@ namespace LabTechnicalTest.API
         public static string SerializeContent(object content)
         {
             JsonSerializer jsonSerializer = new JsonSerializer();
+            //this allows for null fields to simply not exist in serialised output, lowering the weight of the data being transmitted
             jsonSerializer.NullValueHandling = NullValueHandling.Ignore;
 
             StringBuilder sb = new StringBuilder();
             StringWriter sw = new StringWriter(sb);
 
             jsonSerializer.Serialize(sw, content);
-            string output = sb.ToString();
-
-            output = output.Replace(@"\u0026", "&");
-
-            return output;
+            return sb.ToString();
         }
     }
 }

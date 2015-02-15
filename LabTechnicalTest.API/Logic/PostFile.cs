@@ -115,6 +115,12 @@ namespace LabTechnicalTest.API.Logic
 
         private static List<int> ParseData(string input, out string message)
         {
+            if (string.IsNullOrEmpty(input))
+            {
+                message = "Input was null or empty";
+                return null;
+            }
+
             var values = input.Split(',');
             List<int> output = new List<int>();
             foreach (var value in values)
