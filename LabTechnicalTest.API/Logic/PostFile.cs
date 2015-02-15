@@ -12,31 +12,93 @@ namespace LabTechnicalTest.API.Logic
     {
         public static void Run(HttpContext context)
         {
-            var file = GetFileData("file", context);
-
-            var s = file.InputStream;
-            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ImageUploads");
-            if (!Directory.Exists(path))
+            try
             {
-                Directory.CreateDirectory(path);
+                var file = GetFileData("file", context);
+
+                var s = file.InputStream;
+
+                StreamReader sr = new StreamReader(s);
+                string inputData = sr.ReadToEnd();
+
+                var output = ProcessInput(inputData);
+
+                APIHelpers.SerializeAndWriteJSONOutput(context, output);
+            }
+            catch (Exception ex)
+            {
+                //write output as exception message, and use default output of -1
+                var output = new OutputFormat()
+                {
+                    Result = -1,
+                    Message = ex.Message
+                };
+
+                APIHelpers.SerializeAndWriteJSONOutput(context, output);
+            }
+        }
+
+        private static OutputFormat ProcessInput(string inputData)
+        {
+            string message = "";
+
+            var output = new OutputFormat();
+
+            //validate that input is valid...
+
+            //check that input contains list of comma-separated ints between 0 and 2,147,483,647
+            var parsedData = ParseData(inputData, out message);
+            if (parsedData == null || !string.IsNullOrEmpty(message))
+            {
+                output.Message = message;
+                output.Result = -1;
+                return output;
             }
 
-            string strFileName = file.FileName;
-
-            string filePath = path + "\\" + strFileName;
-            FileStream fs = new FileStream(filePath, FileMode.Create);
-            byte[] read = new byte[256];
-            int count = s.Read(read, 0, read.Length);
-            while (count > 0)
+            //number of elements is from 1 to 100,000
+            if (parsedData.Count < 1 || parsedData.Count > 100000)
             {
-                fs.Write(read, 0, count);
-                count = s.Read(read, 0, read.Length);
+                output.Message = string.Format("Length of input was '{0}', length should be between 1 and 100,000", parsedData.Count);
+                output.Result = -1;
+                return output;
             }
-            fs.Close();
 
-            //var wrapper = GetData();
+            //all is well with the input data, now we can actually process it
 
-            //APIHelpers.SerializeAndWriteJSONOutput(context, wrapper);
+
+
+            return output;
+        }
+
+        private static List<int> ParseData(string input, out string message)
+        {
+            var values = input.Split(',');
+            List<int> output = new List<int>();
+            foreach (var value in values)
+            {
+                int parsedInt = -1;
+                if (Int32.TryParse(value, out parsedInt))
+                {
+                    //the parse should fail for a value above 2147483647, as that's the max value for an int32, but I'm checking just to be safe...
+                    if (parsedInt < 0 || parsedInt > 2147483647)
+                    {
+                        message = string.Format("Value '{0}' is not in the range 0-2147483647", value);
+                        return null;
+                    }
+                    else
+                    {
+                        output.Add(parsedInt);
+                    }
+                }
+                else
+                {
+                    message = string.Format("Value '{0}' is not a valid int.", value);
+                    return null;
+                }
+            }
+
+            message = "";
+            return output;
         }
 
         private static HttpPostedFile GetFileData(string fieldName, HttpContext context)
@@ -49,6 +111,12 @@ namespace LabTechnicalTest.API.Logic
             {
                 return null;
             }
+        }
+
+        public class OutputFormat
+        {
+            public int Result { get; set; }
+            public string Message { get; set; }
         }
     }
 }
