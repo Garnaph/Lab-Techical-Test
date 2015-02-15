@@ -141,7 +141,7 @@ namespace LabTechnicalTest.API.Logic
                 }
                 else
                 {
-                    message = string.Format("Value '{0}' is not a valid Int32 value (between -2,147,483,648 and 2,147,483,647.", value);
+                    message = string.Format("Value '{0}' is not a valid Int32 value (between -2,147,483,648 and 2,147,483,647).", value);
                     return null;
                 }
             }

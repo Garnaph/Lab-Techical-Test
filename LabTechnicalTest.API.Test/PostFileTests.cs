@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LabTechnicalTest.API.Logic;
+using System.Collections.Generic;
 
 namespace LabTechnicalTest.API.Test
 {
@@ -10,17 +11,10 @@ namespace LabTechnicalTest.API.Test
         [TestMethod]
         public void BlankFileTest()
         {
+            //0
             string inputData = "";
             var output = PostFile.ProcessInput(inputData);
             Assert.IsTrue(output.Result.Equals(-1));
-        }
-
-        [TestMethod]
-        public void NormalFileTest1()
-        {
-            string inputData = "1,2,3,4,5,5,5,5,5,5,5,5,6,7,8";
-            var output = PostFile.ProcessInput(inputData);
-            Assert.IsTrue(output.Result.Equals(5));
         }
 
         [TestMethod]
@@ -95,14 +89,29 @@ namespace LabTechnicalTest.API.Test
             Assert.IsTrue(output.Result.Equals(-1));
         }
 
-        //TODO message = string.Format("Value '{0}' is not a valid int.", value);
+        [TestMethod]
+        public void NotAValidIntTest()
+        {
+            //5
+            string inputData = "1, 1, asdf, 1, 2";
+            var output = PostFile.ProcessInput(inputData);
+            Assert.IsTrue(output.Result.Equals(-1));
+        }
 
+        [TestMethod]
+        public void InputLengthTooLargeTest()
+        {
+            //100,001
+            List<string> temp = new List<string>();
+            for(int i=0 ; i<100002 ; i++)
+            {
+                temp.Add(i.ToString());
+            }
 
-        //TODO output.Message = string.Format("No clear winner after passing over half the items in the list. Data length '{0}', Threshold '{1}'", inputLength, threshold);
-
-
-        //TODO output.Message = string.Format("Length of input was '{0}', length should be between 1 and 100,000", inputLength);
-
+            string inputData = string.Join(",", temp);
+            var output = PostFile.ProcessInput(inputData);
+            Assert.IsTrue(output.Result.Equals(-1));
+        }
 
     }
 }
