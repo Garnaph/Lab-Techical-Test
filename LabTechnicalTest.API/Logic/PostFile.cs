@@ -102,7 +102,7 @@ namespace LabTechnicalTest.API.Logic
                 if (currentCount > threshold)
                 {
                     output.Result = currentValue;
-                    output.Message = string.Format("Value '{0}' is the winner, with a count of at least '{1}', data length was '{2}', giving a threshold of '{3}'",
+                    output.Message = string.Format("Value '{0}' is the winner, with a count of at least '{1}'. Data length was '{2}', giving a threshold of '{3}'.",
                         currentValue, currentCount, inputLength, threshold
                         );
                     return output;
@@ -141,7 +141,7 @@ namespace LabTechnicalTest.API.Logic
                 }
                 else
                 {
-                    message = string.Format("Value '{0}' is not a valid int.", value);
+                    message = string.Format("Value '{0}' is not a valid Int32 value (between -2,147,483,648 and 2,147,483,647.", value);
                     return null;
                 }
             }
