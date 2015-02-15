@@ -55,18 +55,61 @@ namespace LabTechnicalTest.API.Logic
                 return output;
             }
 
+            int inputLength = parsedData.Count;
+
             //number of elements is from 1 to 100,000
-            if (parsedData.Count < 1 || parsedData.Count > 100000)
+            if (inputLength < 1 || inputLength > 100000)
             {
-                output.Message = string.Format("Length of input was '{0}', length should be between 1 and 100,000", parsedData.Count);
+                output.Message = string.Format("Length of input was '{0}', length should be between 1 and 100,000", inputLength);
                 output.Result = -1;
                 return output;
             }
 
             //all is well with the input data, now we can actually process it
 
+            //use float, as inputLength might be odd, and we want the value for half of this to reflect accurately
+            float threshold = ((float)inputLength) / 2;
 
+            Dictionary<int, int> ongoingData = new Dictionary<int, int>();
+            for (int i = 0; i < inputLength;i++)
+            {
+                int currentValue = parsedData[i];
 
+                //If over half the list has been processed, and we don't yet have a winner, we're not going to get one.
+                //Very important to only do this check as we move onto a number we have not seen before, however, as the winner may span over the halfway mark
+                if ((!ongoingData.ContainsKey(currentValue))
+                    &&
+                    (i > threshold))
+                {
+                    output.Result = -1;
+                    output.Message = string.Format("No clear winner after passing over half the items in the list. Data length '{0}', Threshold '{1}'", inputLength, threshold);
+                    return output;
+                }
+
+                int currentCount = 0;
+
+                if (ongoingData.ContainsKey(currentValue))
+                {
+                    currentCount = ongoingData[currentValue] + 1;
+                    ongoingData[currentValue] = currentCount;
+                }
+                else
+                {
+                    currentCount = 1;
+                    ongoingData.Add(currentValue, currentCount);
+                }
+
+                if (currentCount > threshold)
+                {
+                    output.Result = currentValue;
+                    output.Message = string.Format("Value '{0}' is the winner, with a count of at least '{1}', data length was '{2}', giving a threshold of '{3}'",
+                        currentValue, currentCount, inputLength, threshold
+                        );
+                    return output;
+                }
+            }
+
+            output.Message = "No clear winner";
             return output;
         }
 
