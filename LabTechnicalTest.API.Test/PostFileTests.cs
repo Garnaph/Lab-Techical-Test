@@ -45,6 +45,15 @@ namespace LabTechnicalTest.API.Test
         }
 
         [TestMethod]
+        public void OneItemTest()
+        {
+            //1
+            string inputData = "2";
+            var output = PostFile.ProcessInput(inputData);
+            Assert.IsTrue(output.Result.Equals(2));
+        }
+
+        [TestMethod]
         public void NoWinnerTest()
         {
             //10
